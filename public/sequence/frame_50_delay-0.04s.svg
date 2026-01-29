@@ -1,0 +1,7 @@
+<svg width="1920" height="1080" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100%" height="100%" fill="#ECECEC"/>
+    <rect x="691.9327731092437" y="405.96638655462186" width="536.1344537815125" height="268.0672268907563" rx="20" fill="rgb(71.00840336134453, 71.00840336134453, 71.00840336134453)" />
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Arial" font-size="80" fill="#aaa">
+      Frame 50
+    </text>
+  </svg>
