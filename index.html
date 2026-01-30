@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mavik - Precision Engineering Golf Apparel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2E3B29;
+            --secondary: #EDEDE5;
+            --accent: #E7E5D8;
+            --background: #ECECEC;
+            --surface: #FFFFFF;
+            --foreground: #111111;
+            --foreground-muted: rgba(0, 0, 0, 0.6);
+            --text-inverse: #FFFFFF;
+            --overlay-light: rgba(0, 0, 0, 0.2);
+            --overlay-medium: rgba(0, 0, 0, 0.3);
+            --overlay-dark: rgba(0, 0, 0, 0.5);
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 32px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: var(--foreground);
+            background: var(--background);
+            font-family: 'Clash Display', sans-serif;
+            overflow-x: hidden;
+        }
+
+        a, button {
+            cursor: pointer;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            display: flex;
+            justify-content: center;
+            padding-top: 2rem;
+            pointer-events: none;
+        }
+
+        .navbar-content {
+            pointer-events: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 2rem;
+            height: 58px;
+            border-radius: 13px;
+            background: rgba(36, 71, 29, 0.65);
+            backdrop-filter: blur(45px);
+            max-width: 90vw;
+            width: 1408px;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .navbar-logo img {
+            height: 2rem;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .shop-menu {
+            position: relative;
+        }
+
+        .shop-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            font-size: 0.875rem;
+            font-weight: 500;
+            background: none;
+            border: none;
+            transition: color 0.3s;
+        }
+
+        .shop-btn:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .shop-dropdown {
+            position: absolute;
+            top: calc(100% + 30px);
+            right: 0;
+            width: 800px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            display: none;
+            gap: 3rem;
+            flex-direction: row;
+            text-black;
+            z-index: 1000;
+        }
+
+        .shop-menu:hover .shop-dropdown {
+            display: flex;
+        }
+
+        .shop-dropdown h4 {
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: #6B6B6B;
+            margin-bottom: 0.5rem;
+        }
+
+        .shop-dropdown a {
+            color: #1B3022;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .shop-dropdown a:hover {
+            color: rgba(27, 48, 34, 0.7);
+        }
+
+        .shop-images {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .shop-images img {
+            width: 180px;
+            height: 240px;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-icons {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            color: white;
+        }
+
+        .navbar-icons button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .navbar-icons button:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Hero Section with Canvas */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            background: var(--background);
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .canvas-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.15);
+            pointer-events: none;
+        }
+
+        /* Text Overlays */
+        .hero-text-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+            width: 100%;
+            max-width: 90%;
+            opacity: 1;
+            animation: fadeInCenter 1s ease-out;
+        }
+
+        @keyframes fadeInCenter {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .hero-text-center h1 {
+            font-size: 128px;
+            font-weight: 500;
+            line-height: 100%;
+            letter-spacing: -0.02em;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            text-shadow: 0px 2px 17.1px rgba(0, 0, 0, 0.85);
+        }
+
+        .hero-text-center p {
+            color: white;
+            font-size: 1.25rem;
+            opacity: 0.6;
+            text-shadow: 0px 2px 17.1px rgba(0, 0, 0, 0.85);
+        }
+
+        .hero-text-bottom {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            z-index: 10;
+            width: 494px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .hero-text-bottom p {
+            color: var(--text-inverse);
+            font-size: 1.25rem;
+            font-weight: 500;
+            line-height: 150%;
+            text-shadow: 0px 2px 17.1px rgba(0, 0, 0, 0.45);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 14px;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: rgba(46, 59, 41, 0.9);
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: black;
+            width: 256px;
+            height: 50px;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(237, 237, 229, 0.8);
+            transform: scale(1.05);
+        }
+
+        /* Sections */
+        .section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .glass-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(42px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+        }
+
+        .section-tag {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .section h2 {
+            font-size: 2.875rem;
+            font-weight: 600;
+            line-height: 110%;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .section-text {
+            color: white;
+            font-size: 1.125rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .section-text p {
+            margin-bottom: 1rem;
+        }
+
+        /* Video Section */
+        .video-section {
+            position: relative;
+            height: 400vh;
+            background: var(--surface);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .video-container {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .video-wrapper {
+            width: 100%;
+            height: 100%;
+            border-radius: 48px;
+            overflow: hidden;
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Image Grid Section */
+        .image-grid-section {
+            background: var(--surface);
+            padding: 6rem 2rem;
+            position: relative;
+            z-index: 15;
+            margin-top: -10vh;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .image-grid img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 14px;
+            transition: transform 0.3s ease;
+        }
+
+        .image-grid img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Performance Collection */
+        .performance-section {
+            background: var(--surface);
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .performance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .performance-card {
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .performance-card:hover {
+            transform: translateY(-10px);
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .performance-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--foreground);
+        }
+
+        .performance-card p {
+            color: var(--foreground-muted);
+            line-height: 1.6;
+        }
+
+        /* Real Golfers Section */
+        .golfers-section {
+            background: var(--surface);
+            padding: 6rem 2rem;
+        }
+
+        .golfers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .golfer-card {
+            text-align: center;
+        }
+
+        .golfer-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 14px;
+            margin-bottom: 1.5rem;
+        }
+
+        .golfer-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .golfer-card p {
+            color: var(--foreground-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Experience Section */
+        .experience-section {
+            background: var(--surface);
+            padding: 6rem 2rem;
+        }
+
+        .experience-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), rgba(46, 59, 41, 0.8));
+            color: white;
+            padding: 8rem 2rem;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 3.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: white;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-cta {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cta-dark {
+            background: black;
+            color: white;
+        }
+
+        .btn-cta-dark:hover {
+            background: rgba(0, 0, 0, 0.8);
+            transform: scale(1.05);
+        }
+
+        .btn-cta-light {
+            background: white;
+            color: black;
+            border: 1px solid black;
+        }
+
+        .btn-cta-light:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            position: relative;
+            background: black;
+            color: white;
+            padding: 4rem 2rem;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('/Images/Footer.png') center/cover;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        footer > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-content {
+            backdrop-filter: blur(29px);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3rem;
+            border-radius: 0 0 32px 32px;
+            margin-bottom: 4rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem 1rem;
+            margin-bottom: 5rem;
+        }
+
+        .footer-column h4 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            font-family: 'Clash Display', sans-serif;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: all 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .footer-logo img {
+            height: 3.5rem;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-mission {
+            margin-bottom: 2.5rem;
+        }
+
+        .footer-mission p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .newsletter-form {
+            position: relative;
+            max-width: 400px;
+        }
+
+        .newsletter-form input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 12px;
+            padding: 1rem;
+            font-size: 0.875rem;
+            color: white;
+            transition: border-color 0.3s;
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: white;
+        }
+
+        .newsletter-form .btn {
+            position: absolute;
+            right: 6px;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 0.5rem 1rem;
+            font-size: 0.625rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.875rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            color: white;
+            transition: opacity 0.3s;
+        }
+
+        .social-links a:hover {
+            opacity: 0.7;
+        }
+
+        .social-links svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        /* Search Overlay */
+        .search-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+            z-index: 150;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 8rem;
+        }
+
+        .search-overlay.active {
+            display: flex;
+        }
+
+        .search-content {
+            width: 100%;
+            max-width: 1280px;
+            padding: 0 2rem;
+        }
+
+        .search-input-wrapper {
+            display: flex;
+            align-items: center;
+            border-bottom: 0.5px solid rgba(255, 255, 255, 0.8);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .search-input-wrapper svg {
+            color: rgba(255, 255, 255, 0.8);
+            margin-right: 1rem;
+            width: 20px;
+            height: 20px;
+        }
+
+        .search-input-wrapper input {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 2.25rem;
+            font-weight: 500;
+            outline: none;
+            width: 100%;
+            font-family: 'Clash Display', sans-serif;
+        }
+
+        .search-input-wrapper input::placeholder {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .search-close {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            transition: color 0.3s;
+            margin-left: 1rem;
+        }
+
+        .search-close:hover {
+            color: white;
+        }
+
+        .search-tags {
+            margin-top: 2rem;
+        }
+
+        .search-tags h5 {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-tags-list {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .search-tag {
+            padding: 0.625rem 1.5rem;
+            border-radius: 9999px;
+            background: white;
+            color: black;
+            border: none;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .search-tag:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar-content {
+                width: 95vw;
+                padding: 0.5rem 1rem;
+            }
+
+            .hero-text-center h1 {
+                font-size: 3rem;
+                margin-bottom: 1rem;
+            }
+
+            .hero-text-bottom {
+                width: auto;
+                bottom: 1rem;
+                left: 1rem;
+                right: 1rem;
+            }
+
+            .shop-dropdown {
+                width: auto;
+                max-width: 90vw;
+                flex-direction: column;
+            }
+
+            .shop-images {
+                flex-direction: column;
+            }
+
+            .shop-images img {
+                width: 100%;
+                height: 200px;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="navbar-content">
+            <div class="navbar-logo">
+                <img src="/Mavik-Black.svg" alt="Mavik">
+            </div>
+
+            <div class="navbar-actions">
+                <div class="shop-menu">
+                    <button class="shop-btn">
+                        Shop
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 9 6 6 6-6" />
+                        </svg>
+                    </button>
+
+                    <div class="shop-dropdown">
+                        <div style="display: flex; gap: 4rem; flex-grow: 1; padding-top: 1rem;">
+                            <div>
+                                <h4>Featured</h4>
+                                <a href="#">Best Sellers</a>
+                                <a href="#">Shop All</a>
+                            </div>
+                            <div>
+                                <h4>Categories</h4>
+                                <a href="#">Pants</a>
+                                <a href="#">Shorts</a>
+                                <a href="#">Caps</a>
+                                <a href="#">Accessories</a>
+                            </div>
+                        </div>
+                        <div class="shop-images">
+                            <img src="/Images/Image1.jpg" alt="Featured 1">
+                            <img src="/Images/Image2.jpg" alt="Featured 2">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navbar-icons">
+                    <button id="searchBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </button>
+                    <button>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <path d="M16 10a4 4 0 0 1-8 0"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-content">
+            <div class="search-input-wrapper">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" placeholder="Search for..." id="searchInput">
+                <button class="search-close" id="searchClose">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="search-tags">
+                <h5>Popular Searches</h5>
+                <div class="search-tags-list">
+                    <button class="search-tag">Caps</button>
+                    <button class="search-tag">Shorts</button>
+                    <button class="search-tag">Pants</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section with Canvas -->
+    <section class="hero-section">
+        <canvas id="canvas"></canvas>
+        <div class="canvas-overlay"></div>
+
+        <div class="hero-text-center">
+            <h1>Engineered for the Modern Golfer</h1>
+            <p>Engineered clarity.</p>
+        </div>
+
+        <div class="hero-text-bottom">
+            <p>This isn't just another golf cap. Built with premium breathable fabric and structured design, the Mavik Performance Cap keeps you comfortable and focused from the first tee to the final putt. Integrated magnetic functionality means your essentials stay within reach without the bulk.</p>
+            <button class="btn btn-secondary">Shop the Collection</button>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section">
+        <div class="video-container">
+            <div class="video-wrapper">
+                <video autoplay loop muted playsinline>
+                    <source src="/Video.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Mavik Difference Section -->
+    <section class="section" style="background: var(--surface); padding-top: 3rem;">
+        <div class="glass-box">
+            <p class="section-tag">The Mavik Difference</p>
+            <h2>Golf Apparel That Actually Does Something</h2>
+            <div class="section-text">
+                <p>Golf clothing hasn't meaningfully evolved in years. Most brands offer the same products with different logos—prioritizing streetwear aesthetics over what actually matters on the course.</p>
+                <p>Mavik was built different. Every piece is engineered with a performance-first mindset, combining premium fabrics with innovative magnetic functionality that gives you effortless access to everything you need during your round.</p>
+                <p>No extra bulk. No trips back to the cart. Just intelligent design that moves with you from the first tee to the 18th green.</p>
+            </div>
+            <button class="btn btn-secondary" style="width: 280px; height: 54px; font-size: 1rem;">Discover Our Innovation</button>
+        </div>
+    </section>
+
+    <!-- Image Grid Section -->
+    <section class="image-grid-section">
+        <div class="image-grid">
+            <img src="/Images/Image3.jpg" alt="Gallery 1">
+            <img src="/Images/Image4.jpg" alt="Gallery 2">
+            <img src="/Images/Image5.jpg" alt="Gallery 3">
+            <img src="/Images/Image6.jpg" alt="Gallery 4">
+        </div>
+    </section>
+
+    <!-- Performance Collection -->
+    <section class="performance-section">
+        <h2 style="margin-bottom: 4rem; font-size: 2.5rem;">Performance Collection</h2>
+        <div class="performance-grid">
+            <div class="performance-card">
+                <h3>Breathable Fabric</h3>
+                <p>Premium moisture-wicking materials keep you dry and comfortable throughout your round.</p>
+            </div>
+            <div class="performance-card">
+                <h3>Magnetic Tech</h3>
+                <p>Innovative magnetic integration for secure storage without the bulk.</p>
+            </div>
+            <div class="performance-card">
+                <h3>Precision Fit</h3>
+                <p>Engineered silhouette designed for optimal movement and comfort on the course.</p>
+            </div>
+            <div class="performance-card">
+                <h3>Premium Quality</h3>
+                <p>Built to last with attention to every detail and finishing.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Real Golfers Section -->
+    <section class="golfers-section">
+        <h2 style="text-align: center; margin-bottom: 4rem; font-size: 2.5rem; color: var(--foreground);">Real Golfers Trust Mavik</h2>
+        <div class="golfers-grid">
+            <div class="golfer-card">
+                <img src="/Images/Image1.jpg" alt="Golfer" class="golfer-image">
+                <h3>Alex Johnson</h3>
+                <p>Professional Golfer</p>
+            </div>
+            <div class="golfer-card">
+                <img src="/Images/Image2.jpg" alt="Golfer" class="golfer-image">
+                <h3>Sarah Martinez</h3>
+                <p>Amateur Champion</p>
+            </div>
+            <div class="golfer-card">
+                <img src="/Images/Image3.jpg" alt="Golfer" class="golfer-image">
+                <h3>Mike Chen</h3>
+                <p>Golf Enthusiast</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience-section">
+        <div class="experience-content">
+            <h2 style="margin-bottom: 2rem;">The Mavik Experience</h2>
+            <p style="color: var(--foreground-muted); font-size: 1.125rem; line-height: 1.8;">Wearing Mavik apparel is more than just putting on clothing—it's embracing a philosophy of precision, performance, and purposeful design. Every stitch, every fabric choice, every magnetic element is there for a reason: to help you perform better on the course.</p>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Assembled for the Elite.</h2>
+        <div class="cta-buttons">
+            <button class="btn-cta btn-cta-dark">Pre-order Now</button>
+            <button class="btn-cta btn-cta-light">View Specs</button>
+        </div>
+        <p style="margin-top: 3rem; opacity: 0.4; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.625rem;">Mavik Engineering Lab • v1.0</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="/Mavik-Black.svg" alt="Mavik">
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Discover</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Shop All</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Shipping & Returns</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Questions?</h4>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <div class="footer-mission">
+                        <h4>Our Mission</h4>
+                        <p>Bringing real innovation and consistency back to golf apparel. We engineer performance-first gear with magnetic innovation, giving every golfer a helping hand on the course—because you deserve apparel that functions as well as it looks.</p>
+                    </div>
+                    <div>
+                        <h4>Subscribe to our Newsletter</h4>
+                        <div class="newsletter-form">
+                            <input type="email" placeholder="Email">
+                            <button class="btn btn-secondary" style="width: auto;">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© MAVIK. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
+                    </a>
+                    <a href="#" aria-label="LinkedIn">
+                        <svg viewBox="0 0 448 512" fill="currentColor"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z" /></svg>
+                    </a>
+                    <a href="#" aria-label="Facebook">
+                        <svg viewBox="0 0 320 512" fill="currentColor"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" /></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Canvas Animation
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas ? canvas.getContext('2d') : null;
+        let images = [];
+        const FRAME_COUNT = 162;
+        let isLoading = true;
+
+        function resizeCanvas() {
+            if (!canvas) return;
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = window.innerWidth * dpr;
+            canvas.height = window.innerHeight * dpr;
+            canvas.style.width = window.innerWidth + 'px';
+            canvas.style.height = window.innerHeight + 'px';
+        }
+
+        function preloadImages() {
+            let loadedCount = 0;
+            for (let i = 1; i <= FRAME_COUNT; i++) {
+                const img = new Image();
+                img.crossOrigin = 'anonymous';
+                const filename = String(i).padStart(5, '0') + '.jpg';
+                img.src = `/Mavik_Final/${filename}`;
+                img.onload = () => {
+                    loadedCount++;
+                    if (loadedCount === FRAME_COUNT) {
+                        isLoading = false;
+                        drawFrame(0);
+                    }
+                };
+                images.push(img);
+            }
+        }
+
+        function drawFrame(index) {
+            if (!ctx || isLoading || index >= images.length || !images[index]) return;
+            
+            const img = images[index];
+            if (!img.complete) return;
+
+            const dpr = window.devicePixelRatio || 1;
+            const scale = Math.max(
+                canvas.width / img.width,
+                canvas.height / img.height
+            );
+
+            const x = (canvas.width / 2) - (img.width / 2) * scale;
+            const y = (canvas.height / 2) - (img.height / 2) * scale;
+
+            ctx.fillStyle = 'var(--background)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
+            ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+        }
+
+        window.addEventListener('scroll', () => {
+            if (isLoading) return;
+            const scrollProgress = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+            const frameProgress = Math.min(1, scrollProgress / 0.7);
+            const frameIndex = Math.floor(frameProgress * (FRAME_COUNT - 1));
+            requestAnimationFrame(() => drawFrame(frameIndex));
+        });
+
+        // Search functionality
+        const searchBtn = document.getElementById('searchBtn');
+        const searchOverlay = document.getElementById('searchOverlay');
+        const searchClose = document.getElementById('searchClose');
+        const searchInput = document.getElementById('searchInput');
+
+        searchBtn.addEventListener('click', () => {
+            searchOverlay.classList.add('active');
+            searchInput.focus();
+            document.body.style.overflow = 'hidden';
+        });
+
+        searchClose.addEventListener('click', () => {
+            searchOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        searchOverlay.addEventListener('click', (e) => {
+            if (e.target === searchOverlay) {
+                searchOverlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Initialize
+        if (canvas) {
+            resizeCanvas();
+            preloadImages();
+            window.addEventListener('resize', resizeCanvas);
+        }
+    </script>
+</body>
+</html>
