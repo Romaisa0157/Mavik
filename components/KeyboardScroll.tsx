@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useScroll, useMotionValueEvent, useTransform, motion } from "framer-motion";
 import Button from "./ui/Button";
+import IntroAnimation from "./IntroAnimation";
 
 const FRAME_COUNT = 214;
 const LOADING_THRESHOLD = 0.5; // Show content after 50% frames loaded
@@ -25,7 +26,7 @@ export default function KeyboardScroll() {
             const img = new Image();
             // Mavik sequence: 00001.jpg to 00192.jpg
             const filename = String(i).padStart(5, '0') + ".jpg";
-            img.src = `/Mavik_sequence4/${filename}`;
+            img.src = `/Mavik_Final/${filename}`;
             img.onload = () => {
                 count++;
                 setLoadedCount(prev => prev + 1);
@@ -146,26 +147,28 @@ export default function KeyboardScroll() {
         );
     }
 
-    if (isLoading && loadedCount < FRAME_COUNT) {
+    if (isLoading) {
         return (
-            <div className="h-screen w-full flex flex-col items-center justify-center bg-[var(--background)] text-[var(--foreground)]">
+            <div className="h-screen w-full flex flex-col items-center justify-center bg-[var(--background)]">
                 <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="flex flex-col items-center gap-6"
+                    className="flex flex-col items-center"
                 >
-                    <img src="/Mavik-Black.svg" alt="Mavik" className="h-12 w-auto mb-4" />
-                    <div className="w-64 h-[2px] bg-black/10 rounded-full overflow-hidden">
-                        <motion.div
-                            className="h-full bg-black"
-                            initial={{ width: 0 }}
-                            animate={{ width: `${(loadedCount / FRAME_COUNT) * 100}%` }}
-                            transition={{ duration: 0.1 }}
-                        />
-                    </div>
-                    <p className="text-sm font-medium tracking-widest uppercase opacity-40">
-                        {Math.round((loadedCount / FRAME_COUNT) * 100)}% Loaded
-                    </p>
+                    <motion.img
+                        src="/Mavik-Black.svg"
+                        alt="Mavik"
+                        className="h-12 w-auto brightness-0 invert"
+                        animate={{
+                            scale: [1, 1.05, 1],
+                            opacity: [0.6, 1, 0.6]
+                        }}
+                        transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                        }}
+                    />
                 </motion.div>
             </div>
         );
@@ -175,6 +178,7 @@ export default function KeyboardScroll() {
 
     return (
         <div ref={containerRef} className="relative h-[800vh] bg-[var(--background)]">
+            <IntroAnimation />
             {/* Scroll Targets for Navbar */}
             <div id="home" className="absolute top-0" />
             <div id="precision" className="absolute top-[25%]" />
@@ -215,10 +219,10 @@ export default function KeyboardScroll() {
             <TextOverlay range={[0, 0.10]} className="items-end justify-start pb-8 pl-[32px]">
                 <div style={{ width: '494px' }} className="flex flex-col gap-6">
                     <p style={{
-                        color: 'var(--surface)',
+                        color: 'var(--text-inverse)',
                         fontFamily: '"Clash Display", sans-serif',
                         fontSize: '20px',
-                        fontStyle: 'normal',
+                        fontStyle: 'semi-bold',
                         fontWeight: 500,
                         textShadow: '0px 2px 17.1px 0px rgba(0, 0, 0, 0.45)',
                         lineHeight: '150%', // 27px
@@ -234,18 +238,29 @@ export default function KeyboardScroll() {
                 </div>
             </TextOverlay>
 
-            {/* 25% Scroll - Left aligned */}
-            <TextOverlay range={[0.17, 0.30]} className="justify-start">
-                <div className="max-w-xl">
-                    <h2 className="tracking-tighter mb-4" style={{
+            {/* 25% Scroll - The Mavik Difference */}
+            <TextOverlay range={[0.27, 0.30]} className="justify-start">
+                <div className="max-w-2xl p-10 rounded-[10px] bg-white/10 backdrop-blur-[42px] border border-white/5 shadow-2xl">
+                    <p className="text-white/80 tracking-[0.3em] text-[14px] font-semibold mb-4">The Mavik Difference</p>
+                    <h2 className="mb-6" style={{
                         color: "var(--Secondary, #EDEDE5)",
                         fontFamily: '"Clash Display", sans-serif',
-                        fontSize: "64px",
+                        fontSize: "46px",
                         fontStyle: "normal",
-                        fontWeight: 500,
-                        lineHeight: "100%",
-                    }}>Built for Precision.</h2>
-                    <p className="text-white text-xl text-black/60">Every detail, measured.</p>
+                        fontWeight: 600,
+                        lineHeight: "110%",
+                    }}>Golf Apparel That Actually Does Something</h2>
+                    <div className="space-y-4 mb-8 text-white text-lg leading-relaxed">
+                        <p>Golf clothing hasn't meaningfully evolved in years. Most brands offer the same products with different logos—prioritizing streetwear aesthetics over what actually matters on the course.</p>
+                        <p>Mavik was built different. Every piece is engineered with a performance-first mindset, combining premium fabrics with innovative magnetic functionality that gives you effortless access to everything you need during your round.</p>
+                        <p>No extra bulk. No trips back to the cart. Just intelligent design that moves with you from the first tee to the 18th green.</p>
+                    </div>
+                    <Button
+                        variant="secondary"
+                        className="w-[280px] h-[54px] !rounded-[14px] !text-base font-semibold"
+                    >
+                        Discover Our Innovation
+                    </Button>
                 </div>
             </TextOverlay>
 

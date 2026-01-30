@@ -31,7 +31,6 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <SmoothScroll />
-        <IntroAnimation />
         {children}
       </body>
     </html>
