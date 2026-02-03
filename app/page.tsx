@@ -18,7 +18,7 @@ export default function Home() {
       <ImageGridSection />
 
       {/* New sections overlap the ImageGrid */}
-      <div className="relative z-20 -mt-[50vh]">
+      <div className="relative z-20 -mt-[10vh]">
         <PerformanceCollection />
         <RealGolfersSection />
         <ExperienceSection />

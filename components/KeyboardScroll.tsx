@@ -123,7 +123,7 @@ export default function KeyboardScroll() {
         const y = useTransform(
             scrollYProgress,
             [Math.max(0, range[0] - buffer), range[1] + buffer],
-            [800, -800]
+            [800, -1200]
         );
 
         // Scale: slight pop effect
@@ -198,7 +198,7 @@ export default function KeyboardScroll() {
             <TextOverlay range={[0, 0.10]} className="justify-center text-center">
                 <div>
                     <h1
-                        className="tracking-tighter mb-4"
+                        className="tracking-tighter mb-4 text-center"
                         style={{
                             color: "var(--Secondary, #EDEDE5)",
                             fontFamily: '"Clash Display", sans-serif',
@@ -215,52 +215,129 @@ export default function KeyboardScroll() {
                 </div>
             </TextOverlay>
 
-            {/* Hero Bottom Left Content */}
-            <TextOverlay range={[0, 0.10]} className="items-end justify-start pb-8 pl-[32px]">
-                <div style={{ width: '494px' }} className="flex flex-col gap-6">
+            {/* Hero Bottom Product Showcase */}
+            <TextOverlay range={[0.13, 0.23]}>
+                <div className="flex flex-col max-w-[500px] mx-auto">
+                    {/* Styled Heading */}
+                    <h3 className="mb-6 text-left">
+                        <span style={{
+                            color: 'var(--Secondary, #EDEDE5)',
+                            fontFamily: '"Clash Display", sans-serif',
+                            fontSize: '48px',
+                            fontWeight: 600,
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.02em',
+                        }}>
+                            Quietly{' '}
+                        </span>
+                        <span style={{
+                            fontFamily: '"Birthstone", cursive',
+                            fontSize: '56px',
+                            fontWeight: 400,
+                            color: 'var(--Secondary, #EDEDE5)',
+                        }}>
+                            powerful
+                        </span>
+                        <br />
+                        <span style={{
+                            color: 'var(--Secondary, #EDEDE5)',
+                            fontFamily: '"Clash Display", sans-serif',
+                            fontSize: '48px',
+                            fontWeight: 600,
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.02em',
+                        }}>
+                            Performance
+                        </span>
+                    </h3>
+
+                    {/* Body Text */}
                     <p style={{
-                        color: 'var(--text-inverse)',
-                        fontFamily: '"Clash Display", sans-serif',
-                        fontSize: '20px',
-                        fontStyle: 'semi-bold',
+                        color: 'var(--Secondary, #EDEDE5)',
+                        fontFamily: '"JetBrains Mono", monospace',
+                        fontSize: '16px',
                         fontWeight: 500,
-                        textShadow: '0px 2px 17.1px 0px rgba(0, 0, 0, 0.45)',
-                        lineHeight: '150%', // 27px
+                        lineHeight: '165%',
+                        textAlign: 'left',
+                        marginBottom: '32px',
+                        textShadow: '0px 2px 17.1px rgba(0, 0, 0, 0.45)',
                     }}>
                         This isn't just another golf cap. Built with premium breathable fabric and structured design, the Mavik Performance Cap keeps you comfortable and focused from the first tee to the final putt. Integrated magnetic functionality means your essentials stay within reach without the bulk.
                     </p>
-                    <Button
-                        variant="secondary"
-                        className="w-[256px] h-[50px] !rounded-[14px]"
-                    >
-                        Shop the Collection
-                    </Button>
+
+                    {/* CTA Button */}
+                    <div className="flex justify-start">
+                        <Button
+                            variant="secondary"
+                            className="w-[256px] h-[50px] !rounded-[14px] uppercase tracking-wider font-semibold"
+                        >
+                            Shop Collection
+                        </Button>
+                    </div>
                 </div>
             </TextOverlay>
 
             {/* 25% Scroll - The Mavik Difference */}
-            <TextOverlay range={[0.27, 0.30]} className="justify-start">
-                <div className="max-w-2xl p-10 rounded-[10px] bg-white/10 backdrop-blur-[42px] border border-white/5 shadow-2xl">
-                    <p className="text-white/80 tracking-[0.3em] text-[14px] font-semibold mb-4">The Mavik Difference</p>
-                    <h2 className="mb-6" style={{
-                        color: "var(--Secondary, #EDEDE5)",
-                        fontFamily: '"Clash Display", sans-serif',
-                        fontSize: "46px",
-                        fontStyle: "normal",
-                        fontWeight: 600,
-                        lineHeight: "110%",
-                    }}>Golf Apparel That Actually Does Something</h2>
-                    <div className="space-y-4 mb-8 text-white text-lg leading-relaxed">
-                        <p>Golf clothing hasn't meaningfully evolved in years. Most brands offer the same products with different logos—prioritizing streetwear aesthetics over what actually matters on the course.</p>
-                        <p>Mavik was built different. Every piece is engineered with a performance-first mindset, combining premium fabrics with innovative magnetic functionality that gives you effortless access to everything you need during your round.</p>
-                        <p>No extra bulk. No trips back to the cart. Just intelligent design that moves with you from the first tee to the 18th green.</p>
+            <TextOverlay range={[0.27, 0.37]} className="items-center justify-center">
+                <div className="w-full px-16">
+                    <div className="grid grid-cols-2 gap-16 items-center">
+                        {/* Left Column - Heading & Product */}
+                        <div className="flex flex-col">
+                            {/* Eyebrow */}
+                            <p className="text-white/60 tracking-[0.15em] text-[11px] font-semibold mb-6 uppercase">
+                                The Mavik Difference
+                            </p>
+
+                            {/* Main Heading */}
+                            <h2 className="mb-12" style={{
+                                color: "var(--Secondary, #EDEDE5)",
+                                fontFamily: '"Clash Display", sans-serif',
+                                fontSize: "72px",
+                                fontStyle: "normal",
+                                fontWeight: 600,
+                                lineHeight: "100%",
+                                letterSpacing: '-0.02em',
+                            }}>
+                                Golf Apparel<br />That Actually<br />Does<br />Something
+                            </h2>
+
+                            {/* Product Image - Smaller size at bottom */}
+                            <div className="mt-auto relative">
+                                <div className="relative p-4 w-fit rounded-xl bg-white/5 backdrop-blur-md border border-white/10 shadow-2xl">
+                                    <p className="text-white/70 text-1xl font-semibold uppercase tracking-wider">
+                                        Premium Performance Fabrics
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Right Column - Body Text & CTA */}
+                        <div className="flex flex-col p-10 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 shadow-2xl">
+                            {/* Body Text */}
+                            <div className="mb-10" style={{
+                                color: 'var(--Secondary, #EDEDE5)',
+                                fontFamily: '"JetBrains Mono", monospace',
+                                fontSize: '15px',
+                                fontWeight: 600,
+                                lineHeight: '175%',
+                                textShadow: '0px 2px 17.1px rgba(0, 0, 0, 0.45)',
+                            }}>
+                                <p className="mb-4">Golf clothing hasn't meaningfully evolved in years. Most brands offer the same products with different logos—prioritizing streetwear aesthetics over what actually matters on the course.</p>
+                                <p>Mavik was built different. Every piece is engineered with a performance-first mindset, combining premium fabrics with innovative magnetic functionality that gives you effortless access to everything you need during your round.</p>
+                            </div>
+
+                            {/* CTA Button - Aligned to right */}
+                            <div className="flex justify-end">
+                                <Button
+                                    variant="secondary"
+                                    className="w-[200px] h-[48px] uppercase tracking-wider font-semibold text-sm"
+                                >
+                                    Learn More
+                                </Button>
+                            </div>
+                        </div>
                     </div>
-                    <Button
-                        variant="secondary"
-                        className="w-[280px] h-[54px] !rounded-[14px] !text-base font-semibold"
-                    >
-                        Discover Our Innovation
-                    </Button>
                 </div>
             </TextOverlay>
 
@@ -336,6 +413,6 @@ export default function KeyboardScroll() {
                     <p className="mt-12 text-black/40 font-medium uppercase tracking-[0.2em] text-[10px]">Mavik Engineering Lab • v1.0</p>
                 </div>
             </TextOverlay> */}
-        </div>
+        </div >
     );
 }
