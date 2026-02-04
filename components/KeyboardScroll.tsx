@@ -138,8 +138,8 @@ export default function KeyboardScroll() {
                 className={`fixed inset-0 pointer-events-none flex items-center ${className}`}
                 style={{ opacity, y, scale }}
             >
-                <div className="container mx-auto px-6">
-                    <div className="pointer-events-auto inline-block">
+                <div className="container mx-auto px-6 w-full">
+                    <div className="pointer-events-auto inline-block w-full">
                         {children}
                     </div>
                 </div>
@@ -196,13 +196,12 @@ export default function KeyboardScroll() {
 
             {/* 0% Scroll - Centered */}
             <TextOverlay range={[0, 0.10]} className="justify-center text-center">
-                <div>
+                <div className="px-4 md:px-0">
                     <h1
-                        className="tracking-tighter mb-4 text-center"
+                        className="tracking-tighter mb-4 text-center text-5xl md:text-8xl lg:text-[128px]"
                         style={{
                             color: "var(--Secondary, #EDEDE5)",
                             fontFamily: '"Clash Display", sans-serif',
-                            fontSize: "128px",
                             fontStyle: "normal",
                             fontWeight: 500,
                             lineHeight: "100%",
@@ -211,38 +210,40 @@ export default function KeyboardScroll() {
                     >
                         Engineered for the Modern Golfer
                     </h1>
-                    <p className="text-white text-xl text-black/60 text-shadow: 0px 2px 17.1px 0px rgba(0, 0, 0, 0.85)">Engineered clarity.</p>
+                    <p className="text-white text-base md:text-xl text-black/60 text-shadow: 0px 2px 17.1px 0px rgba(0, 0, 0, 0.85)">Engineered clarity.</p>
                 </div>
             </TextOverlay>
 
             {/* Hero Bottom Product Showcase */}
             <TextOverlay range={[0.13, 0.23]}>
-                <div className="flex flex-col max-w-[500px] mx-auto">
+                <div className="flex flex-col max-w-[500px] mx-0 px-4 md:px-0 items-start">
                     {/* Styled Heading */}
+                    <img
+                        src="/white_golf_cap.png"
+                        alt="Mavik"
+                        className="h-auto w-3/4 md:w-auto mb-6 mx-0"
+                    />
                     <h3 className="mb-6 text-left">
-                        <span style={{
+                        <span className="block text-4xl md:text-5xl" style={{
                             color: 'var(--Secondary, #EDEDE5)',
                             fontFamily: '"Clash Display", sans-serif',
-                            fontSize: '48px',
                             fontWeight: 600,
                             textTransform: 'uppercase',
                             letterSpacing: '0.02em',
                         }}>
                             Quietly{' '}
                         </span>
-                        <span style={{
+                        <span className="block text-5xl md:text-6xl" style={{
                             fontFamily: '"Birthstone", cursive',
-                            fontSize: '56px',
                             fontWeight: 400,
                             color: 'var(--Secondary, #EDEDE5)',
                         }}>
                             powerful
                         </span>
-                        <br />
-                        <span style={{
+
+                        <span className="block text-4xl md:text-5xl" style={{
                             color: 'var(--Secondary, #EDEDE5)',
                             fontFamily: '"Clash Display", sans-serif',
-                            fontSize: '48px',
                             fontWeight: 600,
                             textTransform: 'uppercase',
                             letterSpacing: '0.02em',
@@ -255,13 +256,13 @@ export default function KeyboardScroll() {
                     <p style={{
                         color: 'var(--Secondary, #EDEDE5)',
                         fontFamily: '"JetBrains Mono", monospace',
-                        fontSize: '16px',
+                        fontSize: '14px',
                         fontWeight: 500,
                         lineHeight: '165%',
                         textAlign: 'left',
                         marginBottom: '32px',
                         textShadow: '0px 2px 17.1px rgba(0, 0, 0, 0.45)',
-                    }}>
+                    }} className="md:text-[16px]">
                         This isn't just another golf cap. Built with premium breathable fabric and structured design, the Mavik Performance Cap keeps you comfortable and focused from the first tee to the final putt. Integrated magnetic functionality means your essentials stay within reach without the bulk.
                     </p>
 
@@ -269,7 +270,7 @@ export default function KeyboardScroll() {
                     <div className="flex justify-start">
                         <Button
                             variant="secondary"
-                            className="w-[256px] h-[50px] !rounded-[14px] uppercase tracking-wider font-semibold"
+                            className="w-full md:w-[256px] h-[50px] !rounded-[14px] uppercase tracking-wider font-semibold"
                         >
                             Shop Collection
                         </Button>
@@ -279,8 +280,8 @@ export default function KeyboardScroll() {
 
             {/* 25% Scroll - The Mavik Difference */}
             <TextOverlay range={[0.27, 0.37]} className="items-center justify-center">
-                <div className="w-full px-16">
-                    <div className="grid grid-cols-2 gap-16 items-center">
+                <div className="w-full px-4 md:px-16">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
                         {/* Left Column - Heading & Product */}
                         <div className="flex flex-col">
                             {/* Eyebrow */}
@@ -289,10 +290,9 @@ export default function KeyboardScroll() {
                             </p>
 
                             {/* Main Heading */}
-                            <h2 className="mb-12" style={{
+                            <h2 className="mb-8 md:mb-12 text-5xl md:text-[72px]" style={{
                                 color: "var(--Secondary, #EDEDE5)",
                                 fontFamily: '"Clash Display", sans-serif',
-                                fontSize: "72px",
                                 fontStyle: "normal",
                                 fontWeight: 600,
                                 lineHeight: "100%",
@@ -302,7 +302,7 @@ export default function KeyboardScroll() {
                             </h2>
 
                             {/* Product Image - Smaller size at bottom */}
-                            <div className="mt-auto relative">
+                            <div className="mt-auto relative hidden md:block">
                                 <div className="relative p-4 w-fit rounded-xl bg-white/5 backdrop-blur-md border border-white/10 shadow-2xl">
                                     <p className="text-white/70 text-1xl font-semibold uppercase tracking-wider">
                                         Premium Performance Fabrics
@@ -313,12 +313,11 @@ export default function KeyboardScroll() {
                         </div>
 
                         {/* Right Column - Body Text & CTA */}
-                        <div className="flex flex-col p-10 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 shadow-2xl">
+                        <div className="flex flex-col p-6 md:p-10 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 shadow-2xl">
                             {/* Body Text */}
-                            <div className="mb-10" style={{
+                            <div className="mb-6 md:mb-10 text-sm md:text-[15px]" style={{
                                 color: 'var(--Secondary, #EDEDE5)',
                                 fontFamily: '"JetBrains Mono", monospace',
-                                fontSize: '15px',
                                 fontWeight: 600,
                                 lineHeight: '175%',
                                 textShadow: '0px 2px 17.1px rgba(0, 0, 0, 0.45)',
@@ -328,10 +327,10 @@ export default function KeyboardScroll() {
                             </div>
 
                             {/* CTA Button - Aligned to right */}
-                            <div className="flex justify-end">
+                            <div className="flex justify-start md:justify-end">
                                 <Button
                                     variant="secondary"
-                                    className="w-[200px] h-[48px] uppercase tracking-wider font-semibold text-sm"
+                                    className="w-full md:w-[200px] h-[48px] uppercase tracking-wider font-semibold text-sm"
                                 >
                                     Learn More
                                 </Button>
@@ -340,79 +339,6 @@ export default function KeyboardScroll() {
                     </div>
                 </div>
             </TextOverlay>
-
-            {/* 60% Scroll - Right aligned
-            <TextOverlay range={[0.37, 0.50]} className="justify-end text-right">
-                <div className="max-w-xl ml-auto">
-                    <h2 className="tracking-tighter mb-4" style={{
-                        color: "var(--Secondary, #EDEDE5)",
-                        fontFamily: '"Clash Display", sans-serif',
-                        fontSize: "64px",
-                        fontStyle: "normal",
-                        fontWeight: 500,
-                        lineHeight: "100%",
-                    }}>Layered Engineering.</h2>
-                    <p className="text-white text-xl text-black/60">See what's inside.</p>
-                </div>
-            </TextOverlay> */}
-
-            {/* 90% Scroll - Centered CTA
-            <TextOverlay range={[0.57, 0.70]} className="justify-center text-center">
-                <div className="flex flex-col items-center">
-                    <h2 className="tracking-tighter mb-8"
-                        style={{
-                            color: "var(--foreground)",
-                            fontFamily: '"Clash Display", sans-serif',
-                            fontSize: "64px",
-                            fontStyle: "normal",
-                            fontWeight: 600,
-                            lineHeight: "100%",
-                            textAlign: "center",
-                        }}>
-                        Assembled for the Elite.
-                    </h2> */}
-            {/* <div className="flex gap-4">
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            style={{
-                                display: 'flex',
-                                width: '240px',
-                                height: '56px',
-                                padding: '16px 32px',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                borderRadius: '14px',
-                                background: 'black',
-                                color: 'white',
-                                fontWeight: 600,
-                                fontSize: '15px'
-                            }} className="transition-transform duration-300">
-                            Pre-order Now
-                        </motion.button>
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            style={{
-                                display: 'flex',
-                                width: '240px',
-                                height: '56px',
-                                padding: '16px 32px',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                borderRadius: '14px',
-                                background: 'white',
-                                border: '1px solid black',
-                                color: 'black',
-                                fontWeight: 600,
-                                fontSize: '15px'
-                            }} className="transition-colors duration-300">
-                            View Specs
-                        </motion.button>
-                    </div>
-                    <p className="mt-12 text-black/40 font-medium uppercase tracking-[0.2em] text-[10px]">Mavik Engineering Lab • v1.0</p>
-                </div>
-            </TextOverlay> */}
         </div >
     );
 }

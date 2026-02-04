@@ -1,7 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
-import Button from "./ui/Button";
 
 // Icons
 const SearchIcon = () => (
@@ -32,16 +31,25 @@ const CloseIcon = () => (
     </svg>
 );
 
+const MenuIcon = () => (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="4" y1="12" x2="20" y2="12"></line>
+        <line x1="4" y1="6" x2="20" y2="6"></line>
+        <line x1="4" y1="18" x2="20" y2="18"></line>
+    </svg>
+);
+
 export default function Navbar() {
     const { scrollY } = useScroll();
     const [hidden, setHidden] = useState(false);
     const [isShopOpen, setIsShopOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const searchInputRef = useRef<HTMLInputElement>(null);
 
     useMotionValueEvent(scrollY, "change", (latest) => {
         const previous = scrollY.getPrevious() ?? 0;
-        if (latest > previous && latest > 150 && !isShopOpen && !isSearchOpen) {
+        if (latest > previous && latest > 150 && !isShopOpen && !isSearchOpen && !isMobileMenuOpen) {
             setHidden(true);
         } else {
             setHidden(false);
@@ -49,13 +57,13 @@ export default function Navbar() {
     });
 
     useEffect(() => {
-        if (isSearchOpen) {
-            searchInputRef.current?.focus();
+        if (isSearchOpen || isMobileMenuOpen) {
+            if (isSearchOpen) searchInputRef.current?.focus();
             document.body.style.overflow = "hidden";
         } else {
             document.body.style.overflow = "auto";
         }
-    }, [isSearchOpen]);
+    }, [isSearchOpen, isMobileMenuOpen]);
 
     const shopCategories = [
         { title: "Featured", links: ["Best Sellers", "Shop All"] },
@@ -74,29 +82,45 @@ export default function Navbar() {
                 }}
                 animate={hidden ? "hidden" : "visible"}
                 transition={{ duration: 0.75, ease: "easeInOut" }}
-                className="fixed top-0 left-0 right-0 flex justify-center z-50 pt-8 pointer-events-none"
+                className="fixed top-0 left-0 right-0 flex justify-center z-50 pt-4 md:pt-8 pointer-events-none px-4 md:px-0"
             >
                 <motion.nav
-                    initial={{ y: -100, opacity: 0, width: "5%" }}
-                    animate={{ y: 0, opacity: 1, width: "1408px" }}
+                    initial={{ y: -100, opacity: 0, width: "50%" }}
+                    animate={{ y: 0, opacity: 1, width: "100%" }}
                     transition={{
                         y: { duration: 1.0, ease: "easeOut" },
                         opacity: { duration: 0.5 },
-                        width: { delay: 2.0, duration: 0.8, ease: "circOut" },
+                        width: { delay: 0.5, duration: 0.8, ease: "circOut" },
                     }}
-                    className="pointer-events-auto flex items-center justify-between px-8 py-3 h-[58px] rounded-[13px] bg-[#24471D]/65 backdrop-blur-[45px] max-w-[90vw] relative"
+                    className="pointer-events-auto flex items-center justify-between px-6 md:px-8 py-3 h-[58px] rounded-[13px] bg-[#24471D]/90 md:bg-[#24471D]/65 backdrop-blur-[45px] w-full max-w-[95vw] md:max-w-7xl relative"
                 >
                     {/* LOGO */}
                     <div className="flex items-center">
-                        <img src="/Mavik-Black.svg" alt="Mavik" className="h-8 w-auto brightness-0 invert" />
+                        <img src="/Mavik-Black.svg" alt="Mavik" className="h-6 md:h-8 w-auto brightness-0 invert" />
                     </div>
 
-                    {/* ACTIONS (Right Aligned) */}
+                    {/* MOBILE ACTIONS */}
+                    <div className="flex md:hidden items-center gap-4 text-white">
+                        <button
+                            onClick={() => setIsSearchOpen(true)}
+                            className="hover:text-white/70 transition-colors"
+                        >
+                            <SearchIcon />
+                        </button>
+                        <button
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                            className="text-white focus:outline-none"
+                        >
+                            {isMobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+                        </button>
+                    </div>
+
+                    {/* DESKTOP ACTIONS (Right Aligned) */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ delay: 2.8, duration: 0.5 }}
-                        className="flex items-center gap-10"
+                        transition={{ delay: 1, duration: 0.5 }}
+                        className="hidden md:flex items-center gap-10"
                     >
                         <div
                             className="relative"
@@ -164,6 +188,45 @@ export default function Navbar() {
                 </motion.nav>
             </motion.div>
 
+            {/* Mobile Menu Overlay */}
+            <AnimatePresence>
+                {isMobileMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3 }}
+                        className="fixed inset-0 z-40 bg-[#24471D] pt-24 px-6 md:hidden"
+                    >
+                        <div className="flex flex-col gap-8">
+                            {/* Mobile Navigation Links */}
+                            {shopCategories.map((cat, i) => (
+                                <div key={i} className="flex flex-col gap-4">
+                                    <h4 className="text-white/60 text-sm font-medium tracking-widest uppercase">{cat.title}</h4>
+                                    <div className="flex flex-col gap-3 pl-2">
+                                        {cat.links.map((link, j) => (
+                                            <a
+                                                key={j}
+                                                href="#"
+                                                className="text-2xl font-medium text-white hover:text-white/70 transition-colors"
+                                            >
+                                                {link}
+                                            </a>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                            <div className="mt-8 pt-8 border-t border-white/20">
+                                <a href="#" className="flex items-center gap-3 text-white text-xl font-medium">
+                                    <CartIcon /> Cart
+                                </a>
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+
             {/* Search Overlay */}
             <AnimatePresence>
                 {isSearchOpen && (
@@ -171,13 +234,13 @@ export default function Navbar() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-xl flex items-start justify-center pt-32"
+                        className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-xl flex items-start justify-center pt-32 px-4"
                     >
                         <motion.div
                             initial={{ y: -50, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             exit={{ y: -50, opacity: 0 }}
-                            className="w-full max-w-5xl px-8"
+                            className="w-full max-w-5xl px-0 md:px-8"
                         >
                             <div className="relative flex items-center border-b-[0.5px] border-white/80 pb-4 mb-8">
                                 <span className="text-white/80 mr-4">
@@ -186,8 +249,8 @@ export default function Navbar() {
                                 <input
                                     ref={searchInputRef}
                                     type="text"
-                                    placeholder="Search for..."
-                                    className="bg-transparent border-none text-white text-4xl font-medium outline-none w-full placeholder:text-white/80"
+                                    placeholder="Search..."
+                                    className="bg-transparent border-none text-white text-2xl md:text-4xl font-medium outline-none w-full placeholder:text-white/80"
                                 />
                                 <button
                                     onClick={() => setIsSearchOpen(false)}
@@ -199,7 +262,7 @@ export default function Navbar() {
 
                             <div>
                                 <h5 className="text-white/80 text-xs uppercase tracking-widest mb-6 font-medium">Popular Searches</h5>
-                                <div className="flex gap-3">
+                                <div className="flex flex-wrap gap-3">
                                     {popularSearches.map((tag, i) => (
                                         <button
                                             key={i}

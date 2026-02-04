@@ -46,7 +46,8 @@ export default function ImageGridSection() {
     // Row: 20vw
     // End: 50vh (half screen)
     const h1 = useTransform(scrollYProgress, [0.3, 0.5, 0.7, 0.8], ["40vw", "20vw", "50vh", "50vh"]);
-    const hOthers = useTransform(scrollYProgress, [0.3, 0.5, 0.7, 0.8], ["40vw", "20vw", "50vh", "50vh"]);
+    // Increased height on mobile/responsive for bottom 3 images to 80vh/70vh to fit text
+    const hOthers = useTransform(scrollYProgress, [0.3, 0.5, 0.7, 0.8], ["40vw", "20vw", "80vh", "80vh"]);
 
     // ------ X Positions ------
     // Phase 1 (Right Enter): Handled by a parent container usually, but let's do individual
@@ -151,9 +152,7 @@ export default function ImageGridSection() {
                                 style={{ opacity: textOpacity, x: xTextLeft }}
                                 className="absolute inset-0 flex items-center justify-center p-8"
                             >
-                                <p className="text-[var(--text-inverse)] text-sm md:text-base font-medium leading-relaxed max-w-xs">
-                                    Golf apparel hasn't meaningfully evolved in years. Too many brands chase streetwear aesthetics at the expense of what actually matters on the course: performance, comfort, and function.
-                                </p>
+
                             </motion.div>
                         </div>
                     </motion.div>
@@ -181,9 +180,7 @@ export default function ImageGridSection() {
                                 style={{ opacity: textOpacity, x: xTextRight }}
                                 className="absolute inset-0 flex items-center justify-center p-8"
                             >
-                                <p className="text-[var(--text-inverse)] text-sm md:text-base font-medium leading-relaxed max-w-xs">
-                                    Mavik was built differently. Every piece is engineered with a performance-first mindset, combining premium fabrics with thoughtfully integrated magnetic innovation. No more stuffing your pockets or running back to the cart. Everything you need is built into what you're wearing, easily accessible throughout your entire round.
-                                </p>
+
                             </motion.div>
                         </div>
                     </motion.div>

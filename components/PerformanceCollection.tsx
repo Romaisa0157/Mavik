@@ -31,10 +31,10 @@ const products = [
 
 export default function PerformanceCollection() {
     return (
-        <div className="relative z-10 bg-[var(--surface)] min-h-screen py-24 px-8">
+        <div className="relative z-10 bg-[var(--surface)] min-h-screen py-16 md:py-24 px-4 md:px-8">
             <div className="max-w-[1400px] mx-auto w-full">
                 {/* Header */}
-                <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16 gap-6">
                     <h2
                         className="text-4xl md:text-6xl font-medium tracking-tight text-[var(--foreground)]"
                         style={{ fontFamily: '"Clash Display", sans-serif' }}
@@ -71,7 +71,7 @@ export default function PerformanceCollection() {
                     {products.map((product) => (
                         <div key={product.id} className="group cursor-pointer">
                             {/* Image Container */}
-                            <div className="relative aspect-square bg-[#F5F5F0] mb-6 overflow-hidden">
+                            <div className="relative aspect-square bg-[#F5F5F0] mb-6 overflow-hidden rounded-lg">
                                 {product.isNew && (
                                     <span className="absolute top-4 right-4 bg-[var(--surface)] px-3 py-1 text-xs font-medium rounded-full z-10 shadow-sm text-[var(--foreground)]">
                                         New
@@ -107,7 +107,7 @@ export default function PerformanceCollection() {
 
                                     <motion.button
                                         whileTap={{ scale: 0.95 }}
-                                        className="flex items-center gap-2 bg-[var(--primary)] text-[var(--text-inverse)] px-5 py-2.5 rounded-md text-xs font-medium uppercase tracking-wide opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0"
+                                        className="flex items-center gap-2 bg-[var(--primary)] text-[var(--text-inverse)] px-5 py-2.5 rounded-md text-xs font-medium uppercase tracking-wide opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all transform translate-y-0 md:translate-y-2 md:group-hover:translate-y-0"
                                     >
                                         Add to Cart
                                         <svg

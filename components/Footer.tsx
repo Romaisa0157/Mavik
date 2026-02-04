@@ -19,18 +19,18 @@ export default function Footer() {
             </div>
 
             {/* Glassmorphism Content Box */}
-            <div className="relative z-10 w-full mx-auto backdrop-blur-[29px] bg-white/5 p-12 md:p-16 mb-16 rounded-b-[32px]">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 mb-20">
+            <div className="relative z-10 w-full mx-auto backdrop-blur-[29px] bg-white/5 p-6 md:p-12 lg:p-16 mb-8 md:mb-16 rounded-b-[24px] md:rounded-b-[32px]">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 mb-12 md:mb-20">
 
                     {/* Column 1: Logo */}
                     <div className="flex items-start">
-                        <img src="/Mavik-Black.svg" alt="Mavik" className="h-14 w-auto brightness-0 invert" />
+                        <img src="/Mavik-Black.svg" alt="Mavik" className="h-10 md:h-14 w-auto brightness-0 invert" />
                     </div>
 
                     {/* Column 2: Discover */}
                     <div>
-                        <h4 className="text-xl font-medium mb-8 text-white" style={{ fontFamily: '"Clash Display", sans-serif' }}>Discover</h4>
-                        <ul className="flex flex-col gap-4 text-white/80 text-[15px]">
+                        <h4 className="text-lg md:text-xl font-medium mb-6 md:mb-8 text-white" style={{ fontFamily: '"Clash Display", sans-serif' }}>Discover</h4>
+                        <ul className="flex flex-col gap-3 md:gap-4 text-white/80 text-[14px] md:text-[15px]">
                             <li><a href="#" className="hover:text-white transition-all underline-offset-4 hover:underline">Home</a></li>
                             <li><a href="#" className="hover:text-white transition-all underline-offset-4 hover:underline">Shop All</a></li>
                             <li><a href="#" className="hover:text-white transition-all underline-offset-4 hover:underline">Contact</a></li>
@@ -41,20 +41,20 @@ export default function Footer() {
 
                     {/* Column 3: Questions? */}
                     <div>
-                        <h4 className="text-xl font-medium mb-8 text-white" style={{ fontFamily: '"Clash Display", sans-serif' }}>Questions?</h4>
-                        <ul className="flex flex-col gap-4 text-white/80 text-[15px]">
+                        <h4 className="text-lg md:text-xl font-medium mb-6 md:mb-8 text-white" style={{ fontFamily: '"Clash Display", sans-serif' }}>Questions?</h4>
+                        <ul className="flex flex-col gap-3 md:gap-4 text-white/80 text-[14px] md:text-[15px]">
                             <li><a href="#" className="hover:text-white transition-all underline-offset-4 hover:underline">Contact Us</a></li>
                         </ul>
                     </div>
 
                     {/* Column 4: Our Mission & Newsletter */}
                     <div>
-                        <h4 className="text-xl font-medium mb-6 text-white" style={{ fontFamily: '"Clash Display", sans-serif' }}>Our Mission</h4>
-                        <p className="text-white/70 text-[14px] leading-relaxed mb-10 max-w-sm">
+                        <h4 className="text-lg md:text-xl font-medium mb-4 md:mb-6 text-white" style={{ fontFamily: '"Clash Display", sans-serif' }}>Our Mission</h4>
+                        <p className="text-white/70 text-[13px] md:text-[14px] leading-relaxed mb-8 md:mb-10 max-w-sm">
                             Bringing real innovation and consistency back to golf apparel. We engineer performance-first gear with magnetic innovation, giving every golfer a helping hand on the course—because you deserve apparel that functions as well as it looks.
                         </p>
 
-                        <h4 className="text-xl font-medium mb-6 text-white" style={{ fontFamily: '"Clash Display", sans-serif' }}>Subscribe to our Newsletter</h4>
+                        <h4 className="text-lg md:text-xl font-medium mb-4 md:mb-6 text-white" style={{ fontFamily: '"Clash Display", sans-serif' }}>Subscribe to our Newsletter</h4>
                         <div className="relative max-w-md group">
                             <input
                                 type="email"
@@ -73,8 +73,8 @@ export default function Footer() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="pt-8 border-t border-white/20 flex flex-col md:flex-row justify-between items-center gap-6">
-                    <p className="text-white/60 text-sm">© MAVIK. All rights reserved..</p>
+                <div className="pt-8 border-t border-white/20 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+                    <p className="text-white/60 text-xs md:text-sm">© MAVIK. All rights reserved..</p>
 
                     <div className="flex items-center gap-6">
                         {/* X (Twitter) */}

@@ -4,8 +4,8 @@ import Button from "./ui/Button";
 
 export default function RealGolfersSection() {
     return (
-        <div className="relative z-10 bg-[var(--surface)] min-h-screen">
-            <div className="max-w-[1400px] mx-auto py-12">
+        <div className="relative z-10 bg-[var(--surface)] min-h-screen px-1">
+            <div className="max-w-[1400px] mx-auto py-12 px-4 md:px-0">
                 {/* Top Section: Text Content */}
                 <div className="flex flex-col md:flex-row md:gap--12 mb-12">
                     <div className="flex-1">
